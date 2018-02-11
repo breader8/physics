@@ -1,4 +1,4 @@
-class errors:
+class Errors:
 
     """
     The errors class is used to define

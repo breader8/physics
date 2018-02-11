@@ -27,12 +27,12 @@ setup(
     name='physics',
     packages=['physics'],
     package_dir={'': 'src'},
-    version='0.1.0',
+    version='0.2.0',
     description='An Educational project about Physics',
     author='pyTeens',
     author_email='gabriel@python.it',
     url='https://github.com/pyTeens/physics',
-    download_url='https://github.com/pyTeens/physics/archive/v0.1.0.tar.gz',
+    download_url='https://github.com/pyTeens/physics/archive/v0.2.0.tar.gz',
     keywords=['python', 'physics', 'numbers', 'math'],
     classifiers=[]
 )
