@@ -1,7 +1,7 @@
 class Numbers:
 
     """
-    The Errors class is used to define
+    The Numbers class is used to define
     a number using its significant digits.
     """
 
@@ -13,22 +13,30 @@ class Numbers:
         during physics conventions.
         """
         significant_digits = 0
+        after_comma = 0
         new_number = ''
+        comma_encountered = False
         zero_encountered = False
         for digit in str(number):
             if digit is '.':
                 new_number += '.'
+                comma_encountered = True
                 continue
             if zero_encountered:
                 significant_digits += 1
                 new_number += digit
+                if comma_encountered:
+                    after_comma += 1
             elif digit != '0' and not zero_encountered:
                 zero_encountered = True
                 significant_digits += 1
                 new_number += digit
+                if comma_encountered:
+                    after_comma += 1
 
         self.significant_digits = significant_digits
         self.number = float(new_number)
+        self.after_comma = after_comma
 
     def __isub__(self, other_number):
         """
@@ -38,17 +46,17 @@ class Numbers:
         digits.
         """
         if isinstance(other_number, Numbers):
-            if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number - other_number.number), self.significant_digits))
+            if other_number.after_comma > self.after_comma:
+                return Numbers(round((self.number - other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number - other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number - other_number.number), other_number.after_comma))
 
         else:
             x = Numbers(int(other_number))
-            if x.significant_digits > self.significant_digits:
-                return Numbers(round((self.number - x.number), self.significant_digits))
+            if x.after_comma > self.after_comma:
+                return Numbers(round((self.number - x.number), self.after_comma))
             else:
-                return Numbers(round((self.number - x.number), x.significant_digits))
+                return Numbers(round((self.number - x.number), x.after_comma))
 
     def __rsub__(self, other_number):
         """
@@ -58,17 +66,17 @@ class Numbers:
         digits.
         """
         if isinstance(other_number, Numbers):
-            if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number - other_number.number), self.significant_digits))
+            if other_number.after_comma > self.after_comma:
+                return Numbers(round((self.number - other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number - other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number - other_number.number), other_number.after_comma))
 
         else:
             x = Numbers(int(other_number))
-            if x.significant_digits > self.significant_digits:
-                return Numbers(round((self.number - x.number), self.significant_digits))
+            if x.after_comma > self.after_comma:
+                return Numbers(round((self.number - x.number), self.after_comma))
             else:
-                return Numbers(round((self.number - x.number), x.significant_digits))
+                return Numbers(round((self.number - x.number), x.after_comma))
 
     def __sub__(self, other_number):
         """
@@ -78,17 +86,17 @@ class Numbers:
         digits.
         """
         if isinstance(other_number, Numbers):
-            if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number - other_number.number), self.significant_digits))
+            if other_number.after_comma > self.after_comma:
+                return Numbers(round((self.number - other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number - other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number - other_number.number), other_number.after_comma))
 
         else:
             x = Numbers(int(other_number))
-            if x.significant_digits > self.significant_digits:
-                return Numbers(round((self.number - x.number), self.significant_digits))
+            if x.after_comma > self.after_comma:
+                return Numbers(round((self.number - x.number), self.after_comma))
             else:
-                return Numbers(round((self.number - x.number), x.significant_digits))
+                return Numbers(round((self.number - x.number), x.after_comma))
 
     def __iadd__(self, other_number):
         """
@@ -98,17 +106,17 @@ class Numbers:
         digits.
         """
         if isinstance(other_number, Numbers):
-            if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number + other_number.number), self.significant_digits))
+            if other_number.after_comma > self.after_comma:
+                return Numbers(round((self.number + other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number + other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number + other_number.number), other_number.after_comma))
 
         else:
             x = Numbers(int(other_number))
-            if x.significant_digits > self.significant_digits:
-                return Numbers(round((self.number + x.number), self.significant_digits))
+            if x.after_comma > self.after_comma:
+                return Numbers(round((self.number + x.number), self.after_comma))
             else:
-                return Numbers(round((self.number + x.number), x.significant_digits))
+                return Numbers(round((self.number + x.number), x.after_comma))
 
     def __radd__(self, other_number):
         """
@@ -118,17 +126,17 @@ class Numbers:
         digits.
         """
         if isinstance(other_number, Numbers):
-            if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number + other_number.number), self.significant_digits))
+            if other_number.after_comma > self.after_comma:
+                return Numbers(round((self.number + other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number + other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number + other_number.number), other_number.after_comma))
 
         else:
             x = Numbers(int(other_number))
-            if x.significant_digits > self.significant_digits:
-                return Numbers(round((self.number + x.number), self.significant_digits))
+            if x.after_comma > self.after_comma:
+                return Numbers(round((self.number + x.number), self.after_comma))
             else:
-                return Numbers(round((self.number + x.number), x.significant_digits))
+                return Numbers(round((self.number + x.number), x.after_comma))
 
     def __add__(self, other_number):
         """
@@ -138,17 +146,17 @@ class Numbers:
         digits.
         """
         if isinstance(other_number, Numbers):
-            if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number + other_number.number), self.significant_digits))
+            if other_number.after_comma > self.after_comma:
+                return Numbers(round((self.number + other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number + other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number + other_number.number), other_number.after_comma))
 
         else:
             x = Numbers(int(other_number))
-            if x.significant_digits > self.significant_digits:
-                return Numbers(round((self.number + x.number), self.significant_digits))
+            if x.after_comma > self.after_comma:
+                return Numbers(round((self.number + x.number), self.after_comma))
             else:
-                return Numbers(round((self.number + x.number), x.significant_digits))
+                return Numbers(round((self.number + x.number), x.after_comma))
 
     def __rfloordiv__(self, other_number):
         """
@@ -159,9 +167,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number / other_number.number), self.significant_digits))
+                return Numbers(round((self.number / other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number / other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number / other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number / other_number), self.significant_digits))
@@ -175,9 +183,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number / other_number.number), self.significant_digits))
+                return Numbers(round((self.number / other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number / other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number / other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number / other_number), self.significant_digits))
@@ -191,9 +199,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number / other_number.number), self.significant_digits))
+                return Numbers(round((self.number / other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number / other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number / other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number / other_number), self.significant_digits))
@@ -207,9 +215,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number / other_number.number), self.significant_digits))
+                return Numbers(round((self.number / other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number / other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number / other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number / other_number), self.significant_digits))
@@ -223,9 +231,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number / other_number.number), self.significant_digits))
+                return Numbers(round((self.number / other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number / other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number / other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number / other_number), self.significant_digits))
@@ -239,9 +247,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number / other_number.number), self.significant_digits))
+                return Numbers(round((self.number / other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number / other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number / other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number / other_number), self.significant_digits))
@@ -255,9 +263,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number * other_number.number), self.significant_digits))
+                return Numbers(round((self.number * other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number * other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number * other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number * other_number), self.significant_digits))
@@ -271,9 +279,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number * other_number.number), self.significant_digits))
+                return Numbers(round((self.number * other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number * other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number * other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number * other_number), self.significant_digits))
@@ -287,9 +295,9 @@ class Numbers:
         """
         if isinstance(other_number, Numbers):
             if other_number.significant_digits > self.significant_digits:
-                return Numbers(round((self.number * other_number.number), self.significant_digits))
+                return Numbers(round((self.number * other_number.number), self.after_comma))
             else:
-                return Numbers(round((self.number * other_number.number), other_number.significant_digits))
+                return Numbers(round((self.number * other_number.number), other_number.after_comma))
 
         else:
             return Numbers(round((self.number * other_number), self.significant_digits))
