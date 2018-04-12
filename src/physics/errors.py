@@ -1,13 +1,13 @@
 class Errors:
 
     """
-    The errors class is used to define
+    The Errors class is used to define
     a number with an absolute, relative or
     percentage error and do arithmetic
     operations with them.
     """
 
-    def __init__(self, number, **errors):
+    def __init__(self, number, **Errors):
         """
         It initializes the object, checks
         if an absolute, relative or percentage is
@@ -16,22 +16,22 @@ class Errors:
         physics conventions.
         """
         self.number = number
-        if 'absolute_error' in errors:
-            self.absolute_error = errors['absolute_error']
-            self.relative_error = errors['absolute_error'] / number
+        if 'absolute_error' in Errors:
+            self.absolute_error = Errors['absolute_error']
+            self.relative_error = Errors['absolute_error'] / number
             self.percentage_error = round(
-                errors['absolute_error'] / number,
+                Errors['absolute_error'] / number,
                 4) * 100
 
-        elif 'relative_error' in errors:
-            self.absolute_error = errors['relative_error'] * number
-            self.relative_error = errors['relative_error']
-            self.percentage_error = errors['relative_error'] * 100
+        elif 'relative_error' in Errors:
+            self.absolute_error = Errors['relative_error'] * number
+            self.relative_error = Errors['relative_error']
+            self.percentage_error = Errors['relative_error'] * 100
 
-        elif 'percentage_error' in errors:
-            self.absolute_error = (errors['percentage_error'] / 100) * error
-            self.relative_error = errors['percentage_error'] / 100
-            self.percentage_error = errors['percentage_error']
+        elif 'percentage_error' in Errors:
+            self.absolute_error = (Errors['percentage_error'] / 100) * error
+            self.relative_error = Errors['percentage_error'] / 100
+            self.percentage_error = Errors['percentage_error']
 
         else:
             index = 0
@@ -56,12 +56,12 @@ class Errors:
         a Reverse Addition, summing
         absolute errors and numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number + second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number + second_number.number,
                           absolute_error=(self.absolute_error +
                                           second_number.absolute_error))
         else:
-            return errors(self.number + second_number,
+            return Errors(self.number + second_number,
                           absolute_error=self.absolute_error)
 
     def __iadd__(self, second_number):
@@ -71,12 +71,12 @@ class Errors:
         an Inline Addition, summing
         absolute errors and numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number + second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number + second_number.number,
                           absolute_error=(self.absolute_error +
                                           second_number.absolute_error))
         else:
-            return errors(self.number + second_number,
+            return Errors(self.number + second_number,
                           absolute_error=self.absolute_error)
 
     def __add__(self, second_number):
@@ -86,12 +86,12 @@ class Errors:
         an Addition, summing
         absolute errors and numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number + second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number + second_number.number,
                           absolute_error=(self.absolute_error +
                                           second_number.absolute_error))
         else:
-            return errors(self.number + second_number,
+            return Errors(self.number + second_number,
                           absolute_error=self.absolute_error)
 
     def __sub__(self, second_number):
@@ -99,15 +99,15 @@ class Errors:
         That function is used to
         estabilish the result of
         a Subtraction, summing
-        absolute errors and
+        absolute Errors and
         subtracting numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number - second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number - second_number.number,
                           absolute_error=(self.absolute_error +
                                           second_number.absolute_error))
         else:
-            return errors(self.number - second_number,
+            return Errors(self.number - second_number,
                           absolute_error=self.absolute_error)
 
     def __rsub__(self, second_number):
@@ -115,15 +115,15 @@ class Errors:
         That function is used to
         estabilish the result of
         a Reverse Subtraction,
-        summing absolute errors
+        summing absolute Errors
         and subtracting numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number - second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number - second_number.number,
                           absolute_error=(self.absolute_error +
                                           second_number.absolute_error))
         else:
-            return errors(self.number - second_number,
+            return Errors(self.number - second_number,
                           absolute_error=self.absolute_error)
 
     def __isub__(self, second_number):
@@ -131,15 +131,15 @@ class Errors:
         That function is used to
         estabilish the result of
         an Inline Subtraction,
-        summing absolute errors
+        summing absolute Errors
         and subtracting numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number - second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number - second_number.number,
                           absolute_error=(self.absolute_error +
                                           second_number.absolute_error))
         else:
-            return errors(self.number - second_number,
+            return Errors(self.number - second_number,
                           absolute_error=self.absolute_error)
 
     def __mul__(self, second_number):
@@ -150,12 +150,12 @@ class Errors:
         summing relative errors
         and multiplicating numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number * second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number * second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number * second_number,
+            return Errors(self.number * second_number,
                           relative_error=self.relative_error)
 
     def __rmul__(self, second_number):
@@ -166,12 +166,12 @@ class Errors:
         summing relative errors
         and multiplicating numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number * second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number * second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number * second_number,
+            return Errors(self.number * second_number,
                           relative_error=self.relative_error)
 
     def __imul__(self, second_number):
@@ -182,12 +182,12 @@ class Errors:
         summing relative errors
         and multiplicating numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number * second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number * second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number * second_number,
+            return Errors(self.number * second_number,
                           relative_error=self.relative_error)
 
     def __truediv__(self, second_number):
@@ -198,12 +198,12 @@ class Errors:
         summing relative errors
         and dividing numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number / second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number / second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number / second_number,
+            return Errors(self.number / second_number,
                           relative_error=self.relative_error)
 
     def __rtruediv__(self, second_number):
@@ -214,12 +214,12 @@ class Errors:
         summing relative errors
         and dividing numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number / second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number / second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number / second_number,
+            return Errors(self.number / second_number,
                           relative_error=self.relative_error)
 
     def __itruediv__(self, second_number):
@@ -230,12 +230,12 @@ class Errors:
         summing relative errors
         and dividing numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number / second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number / second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number / second_number,
+            return Errors(self.number / second_number,
                           relative_error=self.relative_error)
 
     def __floordiv__(self, second_number):
@@ -246,12 +246,12 @@ class Errors:
         summing relative errors
         and dividing numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number // second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number // second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number // second_number,
+            return Errors(self.number // second_number,
                           relative_error=self.relative_error)
 
     def __rfloordiv__(self, second_number):
@@ -262,12 +262,12 @@ class Errors:
         summing relative errors
         and dividing numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number // second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number // second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number // second_number,
+            return Errors(self.number // second_number,
                           relative_error=self.relative_error)
 
     def __ifloordiv__(self, second_number):
@@ -278,12 +278,12 @@ class Errors:
         summing relative errors
         and dividing numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number // second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number // second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number // second_number,
+            return Errors(self.number // second_number,
                           relative_error=self.relative_error)
 
     def __mod__(self, second_number):
@@ -295,12 +295,12 @@ class Errors:
         and giving the remainder of
         the divided numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number % second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number % second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number % second_number,
+            return Errors(self.number % second_number,
                           relative_error=self.relative_error)
 
     def __rmod__(self, second_number):
@@ -312,12 +312,12 @@ class Errors:
         and giving the remainder of
         the divided numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number % second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number % second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number % second_number,
+            return Errors(self.number % second_number,
                           relative_error=self.relative_error)
 
     def __imod__(self, second_number):
@@ -329,12 +329,12 @@ class Errors:
         and giving the remainder of
         the divided numbers.
         """
-        if isinstance(second_number, errors):
-            return errors(self.number % second_number.number,
+        if isinstance(second_number, Errors):
+            return Errors(self.number % second_number.number,
                           relative_error=(self.relative_error +
                                           second_number.relative_error))
         else:
-            return errors(self.number % second_number,
+            return Errors(self.number % second_number,
                           relative_error=self.relative_error)
 
     def __pow__(self, second_number, modulo=0):
@@ -346,22 +346,22 @@ class Errors:
         relative error for the second
         number and giving arithmetic power.
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if modulo is 0:
-                return errors(self.number ** second_number.number,
+                return Errors(self.number ** second_number.number,
                               relative_error=(self.relative_error *
                                               second_number.number))
             else:
-                return errors((self.number ** second_number.number) %
+                return Errors((self.number ** second_number.number) %
                               modulo, relative_error=(self.relative_error *
                                                       second_number.number))
         else:
             if modulo is 0:
-                return errors(self.number ** second_number,
+                return Errors(self.number ** second_number,
                               relative_error=(self.relative_error *
                                               second_number))
             else:
-                return errors((self.number ** second_number) %
+                return Errors((self.number ** second_number) %
                               modulo, relative_error=(self.relative_error *
                                                       second_number))
 
@@ -374,22 +374,22 @@ class Errors:
         relative error for the second
         number and giving arithmetic power.
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if modulo is 0:
-                return errors(self.number ** second_number.number,
+                return Errors(self.number ** second_number.number,
                               relative_error=(self.relative_error *
                                               second_number.number))
             else:
-                return errors((self.number ** second_number.number) %
+                return Errors((self.number ** second_number.number) %
                               modulo, relative_error=(self.relative_error *
                                                       second_number.number))
         else:
             if modulo is 0:
-                return errors(self.number ** second_number,
+                return Errors(self.number ** second_number,
                               relative_error=(self.relative_error *
                                               second_number))
             else:
-                return errors((self.number ** second_number) %
+                return Errors((self.number ** second_number) %
                               modulo, relative_error=(self.relative_error *
                                                       second_number))
 
@@ -402,22 +402,22 @@ class Errors:
         relative error for the second
         number and giving arithmetic power.
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if modulo is 0:
-                return errors(self.number ** second_number.number,
+                return Errors(self.number ** second_number.number,
                               relative_error=(self.relative_error *
                                               second_number.number))
             else:
-                return errors((self.number ** second_number.number) %
+                return Errors((self.number ** second_number.number) %
                               modulo, relative_error=(self.relative_error *
                                                       second_number.number))
         else:
             if modulo is 0:
-                return errors(self.number ** second_number,
+                return Errors(self.number ** second_number,
                               relative_error=(self.relative_error *
                                               second_number))
             else:
-                return errors((self.number ** second_number) %
+                return Errors((self.number ** second_number) %
                               modulo, relative_error=(self.relative_error *
                                                       second_number))
 
@@ -468,13 +468,13 @@ class Errors:
         compare two numbers
         using "<".
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if (self.percentage_error < second_number.percentage_error):
                 return True
             else:
                 return False
         else:
-            return self < errors(second_number)
+            return self < Errors(second_number)
 
     def __le__(self, second_number):
         """
@@ -482,13 +482,13 @@ class Errors:
         compare two numbers
         using "<=".
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if (self.percentage_error <= second_number.percentage_error):
                 return True
             else:
                 return False
         else:
-            return self <= errors(second_number)
+            return self <= Errors(second_number)
 
     def __eq__(self, second_number):
         """
@@ -496,7 +496,7 @@ class Errors:
         compare two numbers
         using "==".
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if (self.relative_error ==
                 second_number.relative_error) and (self.number ==
                                                    second_number.number):
@@ -504,7 +504,7 @@ class Errors:
             else:
                 return False
         else:
-            return self == errors(second_number)
+            return self == Errors(second_number)
 
     def __ne__(self, second_number):
         """
@@ -512,7 +512,7 @@ class Errors:
         compare two numbers
         using "!=".
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if (self.relative_error !=
                 second_number.relative_error) and (self.number !=
                                                    second_number.number):
@@ -520,7 +520,7 @@ class Errors:
             else:
                 return False
         else:
-            return self != errors(second_number)
+            return self != Errors(second_number)
 
     def __gt__(self, second_number):
         """
@@ -528,13 +528,13 @@ class Errors:
         compare two numbers
         using ">".
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if (self.percentage_error > second_number.percentage_error):
                 return True
             else:
                 return False
         else:
-            return self > errors(second_number)
+            return self > Errors(second_number)
 
     def __ge__(self, second_number):
         """
@@ -542,13 +542,13 @@ class Errors:
         compare two numbers
         using ">=".
         """
-        if isinstance(second_number, errors):
+        if isinstance(second_number, Errors):
             if (self.percentage_error >= second_number.percentage_error):
                 return True
             else:
                 return False
         else:
-            return self >= errors(second_number)
+            return self >= Errors(second_number)
 
     def __int__(self):
         """
