@@ -341,7 +341,7 @@ class Numbers:
         return the integer
         of the chosen number.
         """
-        return self.number
+        return int(self.number)
 
     def __str__(self):
         """
