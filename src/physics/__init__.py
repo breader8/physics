@@ -6,3 +6,6 @@ from .proportionality import Proportionality
 
 # It imports "gravity" class from gravity.py
 from .gravity import Gravity
+
+# It imports "numbers" class from numbers.py
+from .numbers import Numbers
