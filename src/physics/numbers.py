@@ -28,7 +28,7 @@ class Numbers:
                 new_number += digit
 
         self.significant_digits = significant_digits
-        self.number = int(new_number)
+        self.number = float(new_number)
 
     def __isub__(self, other_number):
         """
