@@ -22,7 +22,8 @@ class Proportionality:
             self.constant = options['constant']
             relation = str(options['relation'].lower()).replace(" ", "_")
             if relation in relations:
-                self.relation = options['relation'][0].upper() + options['relation'][1:].lower()
+                self.relation = options['relation'][
+                    0].upper() + options['relation'][1:].lower()
                 if relation == 'direct_proportionality':
                     self.direct_proportionality = True
                     self.formula = 'k*x'
@@ -50,7 +51,7 @@ class Proportionality:
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
-                    constant = y/x
+                    constant = y / x
                     if last_constant == constant:
                         self.direct_proportionality = True
                         last_constant = constant
@@ -70,7 +71,7 @@ class Proportionality:
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
-                    constant = x*y
+                    constant = x * y
                     if last_constant == constant:
                         self.inverse_proportionality = True
                         last_constant = constant
@@ -90,7 +91,7 @@ class Proportionality:
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
-                    constant = y/(x**2)
+                    constant = y / (x**2)
                     if last_constant == constant:
                         self.quadratic_relationship = True
                         last_constant = constant
@@ -110,7 +111,7 @@ class Proportionality:
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
-                    constant = y*(x**2)
+                    constant = y * (x**2)
                     if last_constant == constant:
                         self.inverse_quadratic_relationship = True
                         last_constant = constant
@@ -151,28 +152,37 @@ class Proportionality:
         return ("Relation: " + self.relation +
                 "\nConstant: " + self.constant)
 
+
 class LessThanTwoNumbersError(Exception):
+
     """
     This exception is called when
     number of parameters are less
     than 2. 0 is not counted.
     """
+
     def __init__(self):
         Exception.__init__(self, "Numbers parameters are less than 2")
 
+
 class NoRelationError(Exception):
+
     """
     This exception is called when
     there's no relation.
     """
+
     def __init__(self):
         Exception.__init__(self, "There's no relation")
 
+
 class MissingNeededParameters(Exception):
+
     """
     This exception is called when
     constant and proportionality aren't
     in the parameters and numbers is missing.
     """
+
     def __init__(self):
         Exception.__init__(self, "There's no relation")

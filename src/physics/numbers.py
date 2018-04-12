@@ -22,7 +22,7 @@ class Numbers:
             if zero_encountered:
                 significant_digits += 1
                 new_number += digit
-            elif digit != '0' and zero_encountered == False:
+            elif digit != '0' and not zero_encountered:
                 zero_encountered = True
                 significant_digits += 1
                 new_number += digit
@@ -403,7 +403,7 @@ class Numbers:
         if isinstance(other_number, Numbers):
             if (self.significant_digits ==
                 other_number.significant_digits) and (self.number ==
-                                                   other_number.number):
+               other_number.number):
                 return True
             else:
                 return False
@@ -419,7 +419,7 @@ class Numbers:
         if isinstance(other_number, Numbers):
             if (self.significant_digits !=
                 other_number.significant_digits) and (self.number !=
-                                                   other_number.number):
+               other_number.number):
                 return True
             else:
                 return False
