@@ -94,7 +94,7 @@ here a list and definitions of them:
    -  **physics/errors.py** - *Errors class*
    -  **physics/gravity.py** - *Gravity class*
    -  **physics/numbers.py** - *Numbers class*
-   -  **physics/proportionality.py* - *Proportionality class*
+   -  **physics/proportionality.py** - *Proportionality class*
 
 How to contribute
 -----------------
@@ -113,7 +113,7 @@ reserved.
 .. _From Github: #from-github
 .. _Using pip: #using-pip
 .. _Downloading files: #downloading-files
-.. _Documentation: http://physics.readthedocs.io
+.. _Documentation: http://pyphysics.readthedocs.io
 .. _Files: #files
 .. _How to contribute: #how-to-contribute
 .. _code of conducts: CODE_OF_CONDUCTS.md
