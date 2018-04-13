@@ -23,16 +23,19 @@
 
 from distutils.core import setup
 
+with open('README.rst', 'r') as f:
+    readme = f.read()
+
 setup(
     name='physics',
     packages=['physics'],
-    package_dir={'': 'src'},
-    version='0.2.0',
+    version='1.0.0',
     description='An Educational project about Physics',
+    long_description=readme,
     author='pyTeens',
     author_email='gabriel@python.it',
     url='https://github.com/pyTeens/physics',
-    download_url='https://github.com/pyTeens/physics/archive/v0.2.0.tar.gz',
+    download_url='https://github.com/pyTeens/physics/archive/v1.0.0.tar.gz',
     keywords=['python', 'physics', 'numbers', 'math'],
     classifiers=[]
 )

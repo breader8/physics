@@ -2,6 +2,9 @@
 ### Python template
 # Requirements
 *.txt
+venv
+build
+docs/build
 !requirements.txt
 # Byte-compiled / optimized / DLL files
 __pycache__/

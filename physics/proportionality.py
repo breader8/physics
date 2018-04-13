@@ -1,3 +1,36 @@
+# This file is a part of physics
+#
+# Copyright (c) 2018 The physics Authors (see AUTHORS)
+#
+# Permission is hereby granted, free of charge, to any person obtaining a copy
+# of this software and associated documentation files (the "Software"), to deal
+# in the Software without restriction, including without limitation the rights
+# to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+# copies of the Software, and to permit persons to whom the Software is
+# furnished to do so, subject to the following conditions:
+#
+# The above copyright notice and this permission notice
+# shall be included in all
+# copies or substantial portions of the Software.
+#
+# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+# AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+# OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+# SOFTWARE.
+
+"""
+physics.proportionality
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+It contains the Proportionality class.
+
+It could be used to define a proportionality relation
+between numbers.
+"""
+
+
 class Proportionality:
 
     """
@@ -8,11 +41,17 @@ class Proportionality:
     """
 
     def __init__(self, **options):
-        """
+        r"""
         It initializes the object and
         it checks **options parameter,
         and then get the constant of the
         proportionality.
+
+        :param \**options: The constant and relation or a dict of numbers (x is the key, y the value)
+        :type \**options: dict
+        :raises MissingNeededParameters: It throws an exception if some parameters are missing.
+        :raises NoRelationError: It throws an exception if there are no relations between numbers.
+        :raises LessThanTwoNumbersError: It throws an exception if there are less numbers than 2.
         """
 
         relations = ('direct_proportionality', 'inverse_proportionality',
@@ -23,7 +62,7 @@ class Proportionality:
             relation = str(options['relation'].lower()).replace(" ", "_")
             if relation in relations:
                 self.relation = options['relation'][
-                    0].upper() + options['relation'][1:].lower()
+                                    0].upper() + options['relation'][1:].lower()
                 if relation == 'direct_proportionality':
                     self.direct_proportionality = True
                     self.formula = 'k*x'
@@ -42,6 +81,7 @@ class Proportionality:
             self.inverse_proportionality = False
             self.quadratic_relationship = False
             self.inverse_quadratic_relationship = False
+            constant = 0
             if 0 in options['numbers']:
                 numbers_options = len(options['numbers']) - 1
             else:
@@ -91,7 +131,7 @@ class Proportionality:
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
-                    constant = y / (x**2)
+                    constant = y / (x ** 2)
                     if last_constant == constant:
                         self.quadratic_relationship = True
                         last_constant = constant
@@ -111,7 +151,7 @@ class Proportionality:
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
-                    constant = y * (x**2)
+                    constant = y * (x ** 2)
                     if last_constant == constant:
                         self.inverse_quadratic_relationship = True
                         last_constant = constant
@@ -132,29 +172,36 @@ class Proportionality:
         else:
             raise MissingNeededParameters()
 
-    def calculate(self, **vars):
-        """
+    def calculate(self, **numbers):
+        r"""
         Calculate the y using
         the formula created
         during proportionality
         check.
-        """
-        if 'x' in vars:
-            k = self.constant
-            x = vars['x']
-            return eval(self.formula)
 
-    def __str__(self):
+        :param \**numbers: The number you want to calculate.
+        :type \**numbers: dict
+        """
+        if 'x' in numbers:
+            k = self.constant
+            x = numbers['x']
+            return eval(self.formula)
+        else:
+            return
+
+    def __str__(self) -> str:
         """
         Return the relation
         and the constant.
+
+        :returns: The relation and its constant.
+        :rtype: str
         """
         return ("Relation: " + self.relation +
                 "\nConstant: " + self.constant)
 
 
 class LessThanTwoNumbersError(Exception):
-
     """
     This exception is called when
     number of parameters are less
@@ -166,7 +213,6 @@ class LessThanTwoNumbersError(Exception):
 
 
 class NoRelationError(Exception):
-
     """
     This exception is called when
     there's no relation.
@@ -177,7 +223,6 @@ class NoRelationError(Exception):
 
 
 class MissingNeededParameters(Exception):
-
     """
     This exception is called when
     constant and proportionality aren't
