@@ -60,19 +60,16 @@ class Errors:
             self.percentage_error = round(
                 settings['absolute_error'] / number,
                 4) * 100
-
-        elif 'relative_error' in Errors:
+        elif 'relative_error' in settings:
             self.absolute_error = settings['relative_error'] * number
             self.relative_error = settings['relative_error']
             self.percentage_error = settings['relative_error'] * 100
 
-        elif 'percentage_error' in Errors:
+        elif 'percentage_error' in settings:
             self.absolute_error = (settings['percentage_error'] / 100) * number
             self.relative_error = settings['percentage_error'] / 100
             self.percentage_error = settings['percentage_error']
-
         else:
-
             if int(number) is 0:
                 index = 0
                 list_number = list(str(number - int(number))[2:])
