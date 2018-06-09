@@ -23,8 +23,12 @@
 
 from distutils.core import setup
 
-with open('README.rst', 'r') as f:
-    readme = f.read()
+try:
+    with open('README.rst', 'r') as f:
+        readme = f.read()
+except Exception:
+    readme = ''
+
 
 setup(
     name='physics',
