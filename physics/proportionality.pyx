@@ -30,8 +30,7 @@ It could be used to define a proportionality relation
 between numbers.
 """
 
-
-class Proportionality:
+cdef class Proportionality:
 
     """
     The proportionality class is used to
@@ -39,6 +38,10 @@ class Proportionality:
     numbers.
     percentage error and do arithmetic
     """
+
+    cdef float constant
+    cdef str relation
+    cdef str formula
 
     def __init__(self, **options):
         r"""
@@ -54,114 +57,104 @@ class Proportionality:
         :raises LessThanTwoNumbersError: It throws an exception if there are less numbers than 2.
         """
 
-        relations = ('direct_proportionality', 'inverse_proportionality',
-                     'quadratic_relationship', 'inverse_proportionality')
+        cdef dict relations = {
+            'direct_proportionality': 'k*x',
+            'inverse_proportionality': 'k/x',
+            'quadratic_relationship': 'k*(x**2)',
+            'inverse_quadratic_proportionality': 'k/(x**2)'}
+        cdef str relation
+        cdef int constant = 0
+        cdef int last_constant = 0
+        cdef:
+            int x
+            int y
+            bint right
 
         if 'constant' in options and 'relation' in options:
-            self.constant = options['constant']
+            self.constant = float(options['constant'])
             relation = str(options['relation'].lower()).replace(" ", "_")
             if relation in relations:
                 self.relation = options['relation'][
                                     0].upper() + options['relation'][1:].lower()
-                if relation == 'direct_proportionality':
-                    self.direct_proportionality = True
-                    self.formula = 'k*x'
-                elif relation == 'inverse_proportionality':
-                    self.inverse_proportionality = True
-                    self.formula = 'k/x'
-                elif relation == 'quadratic_relationship':
-                    self.quadratic_relationship = True
-                    self.formula = 'k*(x**2)'
-                elif relation == 'inverse_quadratic_relationship':
-                    self.inverse_quadratic_relationship = True
-                    self.formula = 'k/(x**2)'
+                self.formula = relations.get(relation)
                 return
         elif 'numbers' in options:
-            self.direct_proportionality = False
-            self.inverse_proportionality = False
-            self.quadratic_relationship = False
-            self.inverse_quadratic_relationship = False
-            constant = 0
             if 0 in options['numbers']:
                 numbers_options = len(options['numbers']) - 1
             else:
                 numbers_options = len(options['numbers'])
             if numbers_options > 1:
-                last_constant = 0
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
                     constant = y / x
                     if last_constant == constant:
-                        self.direct_proportionality = True
+                        right = True
                         last_constant = constant
                     elif last_constant == 0:
-                        self.direct_proportionality = True
+                        right = True
                         last_constant = constant
                     else:
-                        self.direct_proportionality = False
+                        right = False
                         break
-                if self.direct_proportionality:
+                if right:
                     self.constant = constant
                     self.relation = 'Direct proportionality'
                     self.formula = 'k*x'
                     return
-                last_constant = 0
-                constant = 0
+                last_constant, constant = 0, 0
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
                     constant = x * y
                     if last_constant == constant:
-                        self.inverse_proportionality = True
+                        right = True
                         last_constant = constant
                     elif last_constant == 0:
-                        self.inverse_proportionality = True
+                        right = True
                         last_constant = constant
                     else:
-                        self.inverse_proportionality = False
+                        right = False
                         break
-                if self.inverse_proportionality:
+                if right:
                     self.constant = constant
                     self.relation = 'Inverse proportionality'
                     self.formula = 'k/x'
                     return
-                last_constant = 0
-                constant = 0
+                last_constant, constant = 0, 0
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
                     constant = y / (x ** 2)
                     if last_constant == constant:
-                        self.quadratic_relationship = True
+                        right = True
                         last_constant = constant
                     elif last_constant == 0:
-                        self.quadratic_relationship = True
+                        right = True
                         last_constant = constant
                     else:
-                        self.quadratic_relationship = False
+                        right = False
                         break
-                if self.quadratic_relationship:
+                if right:
                     self.constant = constant
                     self.relation = 'Quadratic relationship'
                     self.formula = 'k*(x**2)'
                     return
-                last_constant = 0
-                constant = 0
+                last_constant, constant = 0, 0
                 for x, y in options['numbers'].items():
                     if x is 0 or y is 0:
                         continue
                     constant = y * (x ** 2)
                     if last_constant == constant:
-                        self.inverse_quadratic_relationship = True
+                        right = True
                         last_constant = constant
                     elif last_constant == 0:
-                        self.inverse_quadratic_relationship = True
+                        right = True
                         last_constant = constant
                     else:
-                        self.inverse_quadratic_relationship = False
+                        right = False
                         break
-                if self.inverse_quadratic_relationship:
+                if right:
                     self.constant = constant
                     self.relation = 'Inverse quadratic relationship'
                     self.formula = 'k/(x**2)'
@@ -172,22 +165,19 @@ class Proportionality:
         else:
             raise MissingNeededParameters()
 
-    def calculate(self, **numbers):
+    cpdef float calculate(self, float x):
         r"""
         Calculate the y using
         the formula created
         during proportionality
         check.
 
-        :param \**numbers: The number you want to calculate.
-        :type \**numbers: dict
+        :param x: The number you want to calculate.
+        :type x: float
         """
-        if 'x' in numbers:
-            k = self.constant
-            x = numbers['x']
-            return eval(self.formula)
-        else:
-            return
+
+        cdef float k = self.constant
+        return eval(self.formula)
 
     def __str__(self) -> str:
         """
