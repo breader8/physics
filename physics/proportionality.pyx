@@ -39,9 +39,10 @@ cdef class Proportionality:
     percentage error and do arithmetic
     """
 
-    cdef float constant
-    cdef str relation
-    cdef str formula
+    cdef public float constant
+    cdef public str relation
+    cdef public str formula
+    constant_formulas = {'direct': lambda x, y: y/x, 'inverse': lambda x, y: x*y, 'square': lambda x, y: y/x**2, 'inverse_square': lambda x, y: y*x**2}
 
     def __init__(self, **options):
         r"""
@@ -58,10 +59,10 @@ cdef class Proportionality:
         """
 
         cdef dict relations = {
-            'direct_proportionality': 'k*x',
-            'inverse_proportionality': 'k/x',
-            'quadratic_relationship': 'k*(x**2)',
-            'inverse_quadratic_proportionality': 'k/(x**2)'}
+            'direct': 'k*x',
+            'inverse': 'k/x',
+            'square': 'k*(x**2)',
+            'inverse_square': 'k/(x**2)'}
         cdef str relation
         cdef int constant = 0
         cdef int last_constant = 0
@@ -74,8 +75,7 @@ cdef class Proportionality:
             self.constant = float(options['constant'])
             relation = str(options['relation'].lower()).replace(" ", "_")
             if relation in relations:
-                self.relation = options['relation'][
-                                    0].upper() + options['relation'][1:].lower()
+                self.relation = options['relation'][0].title()
                 self.formula = relations.get(relation)
                 return
         elif 'numbers' in options:
@@ -84,86 +84,50 @@ cdef class Proportionality:
             else:
                 numbers_options = len(options['numbers'])
             if numbers_options > 1:
-                for x, y in options['numbers'].items():
-                    if x is 0 or y is 0:
-                        continue
-                    constant = y / x
-                    if last_constant == constant:
-                        right = True
-                        last_constant = constant
-                    elif last_constant == 0:
-                        right = True
-                        last_constant = constant
-                    else:
-                        right = False
-                        break
-                if right:
-                    self.constant = constant
-                    self.relation = 'Direct proportionality'
-                    self.formula = 'k*x'
-                    return
-                last_constant, constant = 0, 0
-                for x, y in options['numbers'].items():
-                    if x is 0 or y is 0:
-                        continue
-                    constant = x * y
-                    if last_constant == constant:
-                        right = True
-                        last_constant = constant
-                    elif last_constant == 0:
-                        right = True
-                        last_constant = constant
-                    else:
-                        right = False
-                        break
-                if right:
-                    self.constant = constant
-                    self.relation = 'Inverse proportionality'
-                    self.formula = 'k/x'
-                    return
-                last_constant, constant = 0, 0
-                for x, y in options['numbers'].items():
-                    if x is 0 or y is 0:
-                        continue
-                    constant = y / (x ** 2)
-                    if last_constant == constant:
-                        right = True
-                        last_constant = constant
-                    elif last_constant == 0:
-                        right = True
-                        last_constant = constant
-                    else:
-                        right = False
-                        break
-                if right:
-                    self.constant = constant
-                    self.relation = 'Quadratic relationship'
-                    self.formula = 'k*(x**2)'
-                    return
-                last_constant, constant = 0, 0
-                for x, y in options['numbers'].items():
-                    if x is 0 or y is 0:
-                        continue
-                    constant = y * (x ** 2)
-                    if last_constant == constant:
-                        right = True
-                        last_constant = constant
-                    elif last_constant == 0:
-                        right = True
-                        last_constant = constant
-                    else:
-                        right = False
-                        break
-                if right:
-                    self.constant = constant
-                    self.relation = 'Inverse quadratic relationship'
-                    self.formula = 'k/(x**2)'
-                    return
-                raise NoRelationError()
+                self.relation, self.constant = self.search_proportionality(options['numbers'])
+                self.formula = relations.get(self.relation)
             else:
                 raise LessThanTwoNumbersError()
         else:
             raise MissingNeededParameters()
+
+    cdef tuple search_proportionality(self, dict numbers):
+        propor = self.constant_formulas.keys()
+        cdef str pr
+        cdef int constant
+        cdef bint right
+
+        for pr in propor:
+            right, constant = self.is_proportionality(pr, numbers)
+            if right:
+                return pr, constant
+
+        raise NoRelationError()
+
+    cdef tuple is_proportionality(self, str proportionality, dict numbers):
+        cdef int constant = 0
+        cdef int last_constant = 0
+        cdef bint right
+        cdef:
+            int x
+            int y
+
+        for x, y in numbers.items():
+            if x is 0 or y is 0:
+                continue
+
+            constant = self.constant_formulas[proportionality](x, y)
+
+            if last_constant == constant:
+                right = True
+            elif last_constant == 0:
+                right = True
+            else:
+                right = False
+                break
+            last_constant = constant
+
+        return right, constant
 
     cpdef float calculate(self, float x):
         r"""
