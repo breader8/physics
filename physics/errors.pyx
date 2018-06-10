@@ -60,7 +60,7 @@ cdef class Errors:
         """
         self.number = float(number)
         cdef str _
-        cdef list list_number
+        cdef list list_number = []
 
         if 'absolute_error' in settings:
             self.absolute_error = settings['absolute_error']
@@ -560,10 +560,7 @@ cdef class Errors:
         :type second_number: integer, float or Errors
         """
         if isinstance(second_number, Errors):
-            if self.percentage_error < second_number.percentage_error:
-                return True
-            else:
-                return False
+            return self.percentage_error < second_number.percentage_error
         else:
             return self < Errors(second_number)
 
@@ -577,10 +574,7 @@ cdef class Errors:
         :type second_number: integer, float or Errors
         """
         if isinstance(second_number, Errors):
-            if self.percentage_error <= second_number.percentage_error:
-                return True
-            else:
-                return False
+            return self.percentage_error <= second_number.percentage_error
         else:
             return self <= Errors(second_number)
 
@@ -594,12 +588,9 @@ cdef class Errors:
         :type second_number: integer, float or Errors
         """
         if isinstance(second_number, Errors):
-            if (self.relative_error ==
+            return (self.relative_error ==
                 second_number.relative_error) and (self.number ==
-                                                   second_number.number):
-                return True
-            else:
-                return False
+                                                   second_number.number)
         else:
             return self == Errors(second_number)
 
@@ -613,12 +604,9 @@ cdef class Errors:
         :type second_number: integer, float or Errors
         """
         if isinstance(second_number, Errors):
-            if (self.relative_error !=
+            return (self.relative_error !=
                 second_number.relative_error) and (self.number !=
-                                                   second_number.number):
-                return True
-            else:
-                return False
+                                                   second_number.number)
         else:
             return self != Errors(second_number)
 
@@ -632,10 +620,7 @@ cdef class Errors:
         :type second_number: integer, float or Errors
         """
         if isinstance(second_number, Errors):
-            if self.percentage_error > second_number.percentage_error:
-                return True
-            else:
-                return False
+            return self.percentage_error > second_number.percentage_error
         else:
             return self > Errors(second_number)
 
@@ -649,10 +634,7 @@ cdef class Errors:
         :type second_number: integer, float or Errors
         """
         if isinstance(second_number, Errors):
-            if self.percentage_error >= second_number.percentage_error:
-                return True
-            else:
-                return False
+            return self.percentage_error >= second_number.percentage_error
         else:
             return self >= Errors(second_number)
 
@@ -662,7 +644,7 @@ cdef class Errors:
         return the integer
         of the chosen number.
         """
-        return self.number
+        return int(self.number)
 
     def __str__(self):
         """
@@ -678,7 +660,7 @@ cdef class Errors:
         return the float
         of the chosen number.
         """
-        return float(self.number)
+        return self.number
 
     cdef __round__(self, int digits=0):
         """
