@@ -163,3 +163,6 @@ fabric.properties
 
 # Testing files
 examples
+
+# Pycharm .idea files
+.idea
