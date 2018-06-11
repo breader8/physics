@@ -33,13 +33,13 @@ except Exception:
 setup(
     name='physics',
     packages=['physics'],
-    version='1.0.0',
+    version='2.0.0',
     description='An Educational project about Physics',
     long_description=readme,
     author='pyTeens',
     author_email='gabriel@python.it',
     url='https://github.com/pyTeens/physics',
-    download_url='https://github.com/pyTeens/physics/archive/v1.0.0.tar.gz',
+    download_url='https://github.com/pyTeens/physics/archive/v2.0.0.tar.gz',
     keywords=['python', 'physics', 'numbers', 'math'],
     classifiers=[]
 )
