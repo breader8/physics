@@ -39,9 +39,9 @@ cdef class Proportionality:
     percentage error and do arithmetic
     """
 
-    cdef public float constant
-    cdef public str relation
-    cdef public str formula
+    cdef readonly float constant
+    cdef readonly str relation
+    cdef readonly str formula
     constant_formulas = {'direct': lambda x, y: y/x, 'inverse': lambda x, y: x*y, 'square': lambda x, y: y/x**2, 'inverse_square': lambda x, y: y*x**2}
 
     def __init__(self, **options):
@@ -63,21 +63,16 @@ cdef class Proportionality:
             'inverse': 'k/x',
             'square': 'k*(x**2)',
             'inverse_square': 'k/(x**2)'}
-        cdef str relation
-        cdef int constant = 0
-        cdef int last_constant = 0
-        cdef:
-            int x
-            int y
-            bint right
+        cdef int numbers_options
 
         if 'constant' in options and 'relation' in options:
             self.constant = float(options['constant'])
-            relation = str(options['relation'].lower()).replace(" ", "_")
-            if relation in relations:
+            if options['relation'] in relations:
                 self.relation = options['relation'][0].title()
-                self.formula = relations.get(relation)
+                self.formula = relations.get(options['relation'])
                 return
+            else:
+                raise NoRelationError()
         elif 'numbers' in options:
             if 0 in options['numbers']:
                 numbers_options = len(options['numbers']) - 1
@@ -86,13 +81,14 @@ cdef class Proportionality:
             if numbers_options > 1:
                 self.relation, self.constant = self.search_proportionality(options['numbers'])
                 self.formula = relations.get(self.relation)
+                return
             else:
                 raise LessThanTwoNumbersError()
         else:
             raise MissingNeededParameters()
 
     cdef tuple search_proportionality(self, dict numbers):
-        propor = self.constant_formulas.keys()
+        cdef list propor = self.constant_formulas.keys()
         cdef str pr
         cdef int constant
         cdef bint right
