@@ -22,16 +22,16 @@
 # SOFTWARE.
 
 # It imports "errors" class from errors.pyx
-from .errors import Errors
+from physics.errors import Errors
 
 # It imports "proportionality" class from proportionality.pyx
-from .proportionality import Proportionality
+from physics.proportionality import Proportionality
 
 # It imports "gravity" class from gravity.pyx
-from .gravity import Gravity
+from physics.gravity import Gravity
 
 # It imports "numbers" class from numbers.pyx
-from .numbers import Numbers
+from physics.numbers import Numbers
 
 """
 physics

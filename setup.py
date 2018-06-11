@@ -22,6 +22,8 @@
 
 
 from distutils.core import setup
+from distutils.extension import Extension
+from distutils.command.build_py import build_py_2to3 as build_py
 
 try:
     with open('README.rst', 'r') as f:
@@ -29,6 +31,23 @@ try:
 except Exception:
     readme = ''
 
+try:
+    from Cython.Distutils import build_ext
+except ImportError:
+    raise Exception("You must install Cython (pip install cython)!")
+
+cmdclass = {}
+ext_modules = []
+
+cmdclass.update({'build_py': build_py})
+
+ext_modules += [
+    Extension("physics.errors", ["physics/errors.pyx"]),
+    Extension("physics.gravity", ["physics/gravity.pyx"]),
+    Extension("physics.numbers", ["physics/numbers.pyx"]),
+    Extension("physics.proportionality", ["physics/proportionality.pyx"])
+]
+cmdclass.update({'build_ext': build_ext})
 
 setup(
     name='physics',
@@ -41,5 +60,7 @@ setup(
     url='https://github.com/pyTeens/physics',
     download_url='https://github.com/pyTeens/physics/archive/v2.0.0.tar.gz',
     keywords=['python', 'physics', 'numbers', 'math'],
-    classifiers=[]
+    classifiers=[],
+    cmdclass=cmdclass,
+    ext_modules=ext_modules
 )

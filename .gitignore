@@ -166,3 +166,6 @@ examples
 
 # Pycharm .idea files
 .idea
+
+# C files
+*.c
