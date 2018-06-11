@@ -446,6 +446,9 @@ cdef class Errors:
         :param second_number: The number you want to get the power.
         :type second_number: integer, float or Errors
         """
+        if modulo is None:
+            modulo = 0
+            
         if isinstance(second_number, Errors):
             if modulo is 0:
                 return Errors(self.number ** second_number.number,
