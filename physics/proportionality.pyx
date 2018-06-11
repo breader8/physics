@@ -151,33 +151,33 @@ cdef class Proportionality:
                 "\nConstant: " + self.constant)
 
 
-class LessThanTwoNumbersError(Exception):
+cdef class LessThanTwoNumbersError(Exception):
     """
     This exception is called when
     number of parameters are less
     than 2. 0 is not counted.
     """
 
-    def __init__(self):
-        Exception.__init__(self, "Numbers parameters are less than 2")
+    cdef __init__(self):
+        super.__init__(self, "Numbers parameters are less than 2")
 
 
-class NoRelationError(Exception):
+cdef class NoRelationError(Exception):
     """
     This exception is called when
     there's no relation.
     """
 
-    def __init__(self):
-        Exception.__init__(self, "There's no relation")
+    cdef __init__(self):
+        super.__init__(self, "There's no relation")
 
 
-class MissingNeededParameters(Exception):
+cdef class MissingNeededParameters(Exception):
     """
     This exception is called when
     constant and proportionality aren't
     in the parameters and numbers is missing.
     """
 
-    def __init__(self):
-        Exception.__init__(self, "There's no relation")
+    cdef __init__(self):
+        super.__init__(self, "There's no relation")
