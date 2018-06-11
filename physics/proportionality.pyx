@@ -88,7 +88,7 @@ cdef class Proportionality:
             raise MissingNeededParameters()
 
     cdef tuple search_proportionality(self, dict numbers):
-        cdef list propor = self.constant_formulas.keys()
+        propor = self.constant_formulas.keys()
         cdef str pr
         cdef int constant
         cdef bint right
