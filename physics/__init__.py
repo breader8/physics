@@ -21,16 +21,16 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-# It imports "errors" class from errors.py
+# It imports "errors" class from errors.pyx
 from .errors import Errors
 
-# It imports "proportionality" class from proportionality.py
+# It imports "proportionality" class from proportionality.pyx
 from .proportionality import Proportionality
 
-# It imports "gravity" class from gravity.py
+# It imports "gravity" class from gravity.pyx
 from .gravity import Gravity
 
-# It imports "numbers" class from numbers.py
+# It imports "numbers" class from numbers.pyx
 from .numbers import Numbers
 
 """
