@@ -39,13 +39,11 @@ cdef class Gravity:
     Gravity force between them
     """
 
-    cdef readonly float earth_mass = 5.972e24
     cdef readonly int distance
     cdef readonly :
         float mass
         float second_mass
     cdef readonly float gravity_force
-    cdef readonly float uni_constant = 6.67e-11
 
     def __init__(self, **options):
         r"""
@@ -60,15 +58,15 @@ cdef class Gravity:
         if 'earth' in options and 'mass' in options and options['earth']:
             self.distance = 6400
             self.mass = options['mass']
-            self.second_mass = self.earth_mass
-            self.gravity_force = self.uni_constant * \
-                self.earth_mass * self.mass / (self.distance**2)
+            self.second_mass = 5.972e24
+            self.gravity_force = 6.67e-11 * \
+                5.972e24 * self.mass / (self.distance**2)
             return
         if 'mass' in options and 'second_mass' in options and 'distance' in options:
             self.mass = options['mass']
             self.second_mass = options['second_mass']
             self.distance = options['distance']
-            self.gravity_force = self.uni_constant * \
+            self.gravity_force = 6.67e-11 * \
                 (self.second_mass * self.mass / (self.distance**2))
             return
         raise MissingNeededParameters()
@@ -81,7 +79,7 @@ cdef class MissingNeededParameters(Exception):
     there are some missing parameters
     """
 
-    cdef __init__(self):
+    def __init__(self):
         super.__init__(
             self,
             "There are some missing parameters, it is impossible to calculate the Gravity force")

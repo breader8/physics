@@ -158,7 +158,7 @@ cdef class LessThanTwoNumbersError(Exception):
     than 2. 0 is not counted.
     """
 
-    cdef __init__(self):
+    def __init__(self):
         super.__init__(self, "Numbers parameters are less than 2")
 
 
@@ -168,7 +168,7 @@ cdef class NoRelationError(Exception):
     there's no relation.
     """
 
-    cdef __init__(self):
+    def __init__(self):
         super.__init__(self, "There's no relation")
 
 
@@ -179,5 +179,5 @@ cdef class MissingNeededParameters(Exception):
     in the parameters and numbers is missing.
     """
 
-    cdef __init__(self):
+    def __init__(self):
         super.__init__(self, "There's no relation")

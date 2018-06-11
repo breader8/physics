@@ -40,10 +40,10 @@ cdef class Errors:
     operations with them.
     """
 
-    cdef public float number
-    cdef public float absolute_error
-    cdef public float relative_error
-    cdef public float percentage_error
+    cdef readonly float number
+    cdef readonly float absolute_error
+    cdef readonly float relative_error
+    cdef readonly float percentage_error
 
     def __init__(self, float number, **settings):
         r"""

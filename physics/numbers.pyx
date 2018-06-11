@@ -42,7 +42,7 @@ cdef class Numbers:
     a number using its significant digits.
     """
 
-    cdef void __init__(self, float number):
+    def __init__(self, float number):
         """
         It initializes the object and
         get the significant digits
