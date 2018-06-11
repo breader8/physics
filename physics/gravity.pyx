@@ -80,6 +80,6 @@ cdef class MissingNeededParameters(Exception):
     """
 
     def __init__(self):
-        super.__init__(
+        Exception.__init__(
             self,
             "There are some missing parameters, it is impossible to calculate the Gravity force")

@@ -159,7 +159,7 @@ cdef class LessThanTwoNumbersError(Exception):
     """
 
     def __init__(self):
-        super.__init__(self, "Numbers parameters are less than 2")
+        Exception.__init__(self, "Numbers parameters are less than 2")
 
 
 cdef class NoRelationError(Exception):
@@ -169,7 +169,7 @@ cdef class NoRelationError(Exception):
     """
 
     def __init__(self):
-        super.__init__(self, "There's no relation")
+        Exception.__init__(self, "There's no relation")
 
 
 cdef class MissingNeededParameters(Exception):
@@ -180,4 +180,4 @@ cdef class MissingNeededParameters(Exception):
     """
 
     def __init__(self):
-        super.__init__(self, "There's no relation")
+        Exception.__init__(self, "There's no relation")
