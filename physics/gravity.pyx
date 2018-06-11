@@ -31,13 +31,21 @@ some objects.
 """
 
 
-class Gravity:
+cdef class Gravity:
 
     """
     Given two masses and their
     distance, it calculates the
     Gravity force between them
     """
+
+    cdef readonly float earth_mass = 5.972e24
+    cdef readonly int distance
+    cdef readonly :
+        float mass
+        float second_mass
+    cdef readonly float gravity_force
+    cdef readonly float uni_constant = 6.67e-11
 
     def __init__(self, **options):
         r"""
@@ -50,32 +58,30 @@ class Gravity:
         :raises MissingNeededParameters: It throws an exception when some parameters are missing.
         """
         if 'earth' in options and 'mass' in options and options['earth']:
-            universal_gravity_constant = float('6.67e-11')
-            earth_mass = float('5.972e24')
             self.distance = 6400
             self.mass = options['mass']
-            self.gravity_force = universal_gravity_constant * \
-                earth_mass * self.mass / (self.distance**2)
+            self.second_mass = self.earth_mass
+            self.gravity_force = self.uni_constant * \
+                self.earth_mass * self.mass / (self.distance**2)
             return
         if 'mass' in options and 'second_mass' in options and 'distance' in options:
-            universal_gravity_constant = 6.67e-11
             self.mass = options['mass']
             self.second_mass = options['second_mass']
             self.distance = options['distance']
-            self.gravity_force = universal_gravity_constant * \
+            self.gravity_force = self.uni_constant * \
                 (self.second_mass * self.mass / (self.distance**2))
             return
         raise MissingNeededParameters()
 
 
-class MissingNeededParameters(Exception):
+cdef class MissingNeededParameters(Exception):
 
     """
     This exception is called when
     there are some missing parameters
     """
 
-    def __init__(self):
-        Exception.__init__(
+    cdef __init__(self):
+        super.__init__(
             self,
             "There are some missing parameters, it is impossible to calculate the Gravity force")
