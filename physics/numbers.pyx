@@ -31,14 +31,18 @@ digits.
 """
 
 
-class Numbers:
+cdef class Numbers:
+
+    cdef readonly int significant_digits
+    cdef readonly float number
+    cdef readonly int after_comma
 
     """
     The Numbers class is used to define
     a number using its significant digits.
     """
 
-    def __init__(self, number):
+    cdef void __init__(self, float number):
         """
         It initializes the object and
         get the significant digits
@@ -48,11 +52,14 @@ class Numbers:
         :param number: The number you've chosen.
         :type number: int or float
         """
-        significant_digits = 0
-        after_comma = 0
-        new_number = ''
-        comma_encountered = False
-        zero_encountered = False
+
+        cdef int significant_digits = 0
+        cdef int after_comma = 0
+        cdef str new_number = ''
+        cdef bint comma_encountered = False
+        cdef bint zero_encountered = False
+        cdef str digit
+
         for digit in str(number):
             if digit is '.':
                 new_number += '.'
