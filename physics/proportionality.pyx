@@ -45,14 +45,11 @@ cdef class Proportionality:
     constant_formulas = {'direct': lambda x, y: y/x, 'inverse': lambda x, y: x*y, 'square': lambda x, y: y/x**2, 'inverse_square': lambda x, y: y*x**2}
 
     def __init__(self, **options):
-        r"""
-        It initializes the object and
-        it checks **options parameter,
+        """It initializes the object and
+        it checks options parameter (kwargs),
         and then get the constant of the
         proportionality.
 
-        :param \**options: The constant and relation or a dict of numbers (x is the key, y the value)
-        :type \**options: dict
         :raises MissingNeededParameters: It throws an exception if some parameters are missing.
         :raises NoRelationError: It throws an exception if there are no relations between numbers.
         :raises LessThanTwoNumbersError: It throws an exception if there are less numbers than 2.
