@@ -49,6 +49,9 @@ ext_modules += [
 ]
 cmdclass.update({'build_ext': build_ext})
 
+for module in ext_modules:
+    module.cython_directives = {"embedsignature": True}
+
 setup(
     name='physics',
     packages=['physics'],
