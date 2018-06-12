@@ -77,7 +77,7 @@ cdef class Gravity:
 
         :returns: The Representation
         :rtype: str"""
-        return "Gravity(mass=" + str(self.mass) + ", second_mass" + str(self.second_mass) + ", distance=" + str(self.distance) + ")"
+        return "Gravity(mass=" + str(self.mass) + ", second_mass=" + str(self.second_mass) + ", distance=" + str(self.distance) + ")"
 
 
 cdef class MissingNeededParameters(Exception):
