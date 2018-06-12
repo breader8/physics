@@ -185,4 +185,4 @@ cdef class MissingNeededParameters(Exception):
     """
 
     def __init__(self):
-        Exception.__init__(self, "There's no relation")
+        Exception.__init__(self, "There are some missing parameters")
