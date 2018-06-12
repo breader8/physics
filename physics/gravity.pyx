@@ -39,7 +39,7 @@ cdef class Gravity:
     Gravity force between them
     """
 
-    cdef readonly int distance
+    cdef readonly float distance
     cdef readonly :
         float mass
         float second_mass
@@ -56,7 +56,7 @@ cdef class Gravity:
         :raises MissingNeededParameters: It throws an exception when some parameters are missing.
         """
         if 'earth' in options and 'mass' in options and options['earth']:
-            self.distance = 6400
+            self.distance = 6400.0
             self.mass = options['mass']
             self.second_mass = 5.972e24
             self.gravity_force = 6.67e-11 * \
@@ -65,7 +65,7 @@ cdef class Gravity:
         if 'mass' in options and 'second_mass' in options and 'distance' in options:
             self.mass = options['mass']
             self.second_mass = options['second_mass']
-            self.distance = options['distance']
+            self.distance = float(options['distance'])
             self.gravity_force = 6.67e-11 * \
                 (self.second_mass * self.mass / (self.distance**2))
             return
