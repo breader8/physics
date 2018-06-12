@@ -26,9 +26,9 @@ from distutils.extension import Extension
 from distutils.command.build_py import build_py_2to3 as build_py
 
 try:
-    with open('README.rst', 'r') as f:
+    with open('README.rst', 'r', encoding='utf-8') as f:
         readme = f.read()
-except Exception:
+except FileNotFoundError:
     readme = ''
 
 try:
@@ -55,13 +55,13 @@ for module in ext_modules:
 setup(
     name='physics',
     packages=['physics'],
-    version='2.0.0',
+    version='2.0.1',
     description='An Educational project about Physics',
     long_description=readme,
     author='pyTeens',
     author_email='gabriel@python.it',
     url='https://github.com/pyTeens/physics',
-    download_url='https://github.com/pyTeens/physics/archive/v2.0.0.tar.gz',
+    download_url='https://github.com/pyTeens/physics/archive/v2.0.1.tar.gz',
     keywords=['python', 'physics', 'numbers', 'math'],
     classifiers=[],
     cmdclass=cmdclass,
