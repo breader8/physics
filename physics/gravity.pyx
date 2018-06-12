@@ -71,6 +71,14 @@ cdef class Gravity:
             return
         raise MissingNeededParameters()
 
+    def __repr__(self) -> str:
+        """Returns a representation
+        of the object.
+
+        :returns: The Representation
+        :rtype: str"""
+        return "Gravity(mass=" + str(self.mass) + ", second_mass" + str(self.second_mass) + ", distance=" + str(self.distance) + ")"
+
 
 cdef class MissingNeededParameters(Exception):
 

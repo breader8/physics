@@ -68,7 +68,7 @@ cdef class Proportionality:
         if 'constant' in options and 'relation' in options:
             self.constant = float(options['constant'])
             if options['relation'] in relations:
-                self.relation = options['relation'][0].title()
+                self.relation = options['relation']
                 self.formula = relations.get(options['relation'])
                 return
             else:
@@ -147,8 +147,16 @@ cdef class Proportionality:
         :returns: The relation and its constant.
         :rtype: str
         """
-        return ("Relation: " + self.relation +
+        return ("Relation: " + self.relation.title() + " relationship" +
                 "\nConstant: " + self.constant)
+
+    def __repr__(self) -> str:
+        """Return the representation
+        of the object.
+
+        :returns: The representation
+        :rtype: str"""
+        return "Proportionality(constant=" + str(self.constant) + ", relation=" + str(self.relation) + ")"
 
 
 cdef class LessThanTwoNumbersError(Exception):

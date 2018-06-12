@@ -509,6 +509,15 @@ cdef class Numbers:
         """
         return str(self.number)
 
+    def __repr__(self) -> str:
+        """That function is used to
+        return the representation of
+        the object
+
+        :returns: The representation
+        :rtype: str"""
+        return "Numbers(" + str(self.number) + ")"
+
     def __float__(self) -> float:
         """
         That function is used to

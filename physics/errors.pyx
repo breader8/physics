@@ -448,7 +448,7 @@ cdef class Errors:
         """
         if modulo is None:
             modulo = 0
-            
+
         if isinstance(second_number, Errors):
             if modulo is 0:
                 return Errors(self.number ** second_number.number,
@@ -656,6 +656,14 @@ cdef class Errors:
         of the chosen number.
         """
         return str(self.number) + " ± " + str(self.absolute_error)
+
+    def __repr__(self) -> str:
+        """Returns the representation
+        of the object.
+
+        :returns: The Representation
+        :rtype: str"""
+        return "Errors(" + str(self.number) + ", absolute_error=" + str(self.absolute_error) + ")"
 
     def __float__(self):
         """
