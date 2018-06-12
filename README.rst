@@ -89,12 +89,12 @@ here a list and definitions of them:
 
 -  **physics** - *Main directory*
 
-   -  **physics/__init__.py** - *Init file, it included all
+   -  **physics/__init__.pyx** - *Init file, it included all
       classes*
-   -  **physics/errors.py** - *Errors class*
-   -  **physics/gravity.py** - *Gravity class*
-   -  **physics/numbers.py** - *Numbers class*
-   -  **physics/proportionality.py** - *Proportionality class*
+   -  **physics/errors.pyx** - *Errors class*
+   -  **physics/gravity.pyx** - *Gravity class*
+   -  **physics/numbers.pyx** - *Numbers class*
+   -  **physics/proportionality.pyx** - *Proportionality class*
 
 How to contribute
 -----------------
