@@ -104,7 +104,7 @@ the `contributing document`_, then ask
 `hearot`_ to enter the **organization**
 (`pyTeens`_).
 
-**Copyright** (c) 2018 `pyTeens <https://teens.python.it>`__. All rights
+**Copyright** (c) 2019 `pyTeens <https://teens.python.it>`__. All rights
 reserved.
 
 .. _Python: https://python.org

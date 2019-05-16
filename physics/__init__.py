@@ -1,6 +1,6 @@
 # This file is a part of physics
 #
-# Copyright (c) 2018 The physics Authors (see AUTHORS)
+# Copyright (c) 2019 The physics Authors (see AUTHORS)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -28,7 +28,7 @@ from physics.errors import Errors
 from physics.proportionality import Proportionality
 
 # It imports "gravity" class from gravity.pyx
-from physics.gravity import Gravity
+from physics.gravity import calculate_gravity
 
 # It imports "numbers" class from numbers.pyx
 from physics.numbers import Numbers

@@ -1,6 +1,6 @@
 # This file is a part of physics
 #
-# Copyright (c) 2018 The physics Authors (see AUTHORS)
+# Copyright (c) 2019 The physics Authors (see AUTHORS)
 #
 # Permission is hereby granted, free of charge, to any person obtaining a copy
 # of this software and associated documentation files (the "Software"), to deal
@@ -30,64 +30,23 @@ It could be used to get the gravity force of
 some objects.
 """
 
+cdef float GravitationalConstant = 6.67408e-11
+cdef float Earth = 5.9722e24
+cdef float EarthRadius = 6371.0
 
-cdef class Gravity:
-
+cpdef float calculate_gravity(float mass, float second_mass = Earth, float distance = EarthRadius):
     """
     Given two masses and their
     distance, it calculates the
-    Gravity force between them
+    Gravity force between them.
+    
+    :param mass: The first mass.
+    :param second_mass: The second mass. By default, the earth mass is used.
+    :param distance: The distance between the two masses. By the default, the radius of the earth is used.
+    :type mass: float
+    :type second_mass: float
+    :type distance: float
+    :returns: The gravity force.
+    :rtype: float
     """
-
-    cdef readonly float distance
-    cdef readonly :
-        float mass
-        float second_mass
-    cdef readonly float gravity_force
-
-    def __init__(self, **options):
-        r"""
-        It calculates the gravity force
-        by using the parameters given into
-        options
-
-        :param \**options: The mass, the second_mass and the distance of the objects or just a mass with the earth flag.
-        :type \**options: dict
-        :raises MissingNeededParameters: It throws an exception when some parameters are missing.
-        """
-        if 'earth' in options and 'mass' in options and options['earth']:
-            self.distance = 6400.0
-            self.mass = options['mass']
-            self.second_mass = 5.972e24
-            self.gravity_force = 6.67e-11 * \
-                5.972e24 * self.mass / (self.distance**2)
-            return
-        if 'mass' in options and 'second_mass' in options and 'distance' in options:
-            self.mass = options['mass']
-            self.second_mass = options['second_mass']
-            self.distance = float(options['distance'])
-            self.gravity_force = 6.67e-11 * \
-                (self.second_mass * self.mass / (self.distance**2))
-            return
-        raise MissingNeededParameters()
-
-    def __repr__(self) -> str:
-        """Returns a representation
-        of the object.
-
-        :returns: The Representation
-        :rtype: str"""
-        return "Gravity(mass=" + str(self.mass) + ", second_mass=" + str(self.second_mass) + ", distance=" + str(self.distance) + ")"
-
-
-cdef class MissingNeededParameters(Exception):
-
-    """
-    This exception is called when
-    there are some missing parameters
-    """
-
-    def __init__(self):
-        Exception.__init__(
-            self,
-            "There are some missing parameters, it is impossible to calculate the Gravity force")
+    return GravitationalConstant * mass * second_mass / distance**2

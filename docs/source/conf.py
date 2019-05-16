@@ -21,7 +21,7 @@ os.system('cd ../.. && python setup.py build_ext --inplace')
 # -- Project information -----------------------------------------------------
 
 project = 'physics'
-copyright = '2018, pyTeens'
+copyright = '2019, pyTeens'
 author = 'pyTeens'
 
 # The short X.Y version
